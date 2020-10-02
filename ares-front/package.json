@@ -30,5 +30,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@material-ui/core": "^4.11.0",
+    "react-hook-form": "^6.8.6",
+    "react-router-dom": "^5.2.0"
   }
 }
