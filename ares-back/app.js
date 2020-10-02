@@ -7,10 +7,11 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 //IMPORT HTTP ERROR
-const HttpError = require("./models/http-error");
+const HttpError = require("./models/common/http-error");
 
 //IMPORT ROUTES
 const userRoute = require("./routes/user-route");
+const categoryRoute = require("./routes/category-route");
 
 //EXPRESS APP
 const app = express();
@@ -22,6 +23,7 @@ app.use(cookieParser());
 
 //ROUTES MIDDLEWARE
 app.use("/api/user", userRoute);
+app.use("/api/category", categoryRoute);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);

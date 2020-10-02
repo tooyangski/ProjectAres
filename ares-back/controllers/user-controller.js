@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const HttpError = require("../models/http-error");
+const HttpError = require("../models/common/http-error");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -27,7 +27,7 @@ const signup = async (req, res, next) => {
     }
   } catch (err) {
     const error = new HttpError(
-      "Signing up failed, please try again later.",
+      "Failed to create user, please try again later.",
       500
     );
     return next(error);
@@ -38,7 +38,7 @@ const signup = async (req, res, next) => {
     hashedPassword = await bcrypt.hash(password, 12);
   } catch (err) {
     const error = new HttpError(
-      "Could not create user, please try again.",
+      "Failed to create user, please try again later.",
       500
     );
     return next(error);
@@ -54,7 +54,7 @@ const signup = async (req, res, next) => {
     await createdUser.save();
   } catch (err) {
     const error = new HttpError(
-      "Signing up failed, please try again later.",
+      "Failed to create user, please try again later.",
       500
     );
     return next(error);
@@ -69,7 +69,7 @@ const signup = async (req, res, next) => {
     );
   } catch (err) {
     const error = new HttpError(
-      "Signing up failed, please try again later.",
+      "Failed to create user, please try again later.",
       500
     );
     return next(error);
@@ -97,7 +97,7 @@ const login = async (req, res, next) => {
     }
   } catch (err) {
     const error = new HttpError(
-      "Logging in failed, please try again later.",
+      "Failed to login, please try again later.",
       500
     );
     return next(error);
@@ -121,7 +121,7 @@ const login = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     const error = new HttpError(
-      "Could not log you in, please check your credentials and try again.",
+      "Failed to login, please try again later.",
       500
     );
     return next(error);
@@ -136,7 +136,7 @@ const login = async (req, res, next) => {
     );
   } catch (err) {
     const error = new HttpError(
-      "Logging in failed, please try again later.",
+      "Failed to login, please try again later.",
       500
     );
     return next(error);
