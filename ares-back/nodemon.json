@@ -1,0 +1,8 @@
+{
+  "env": {
+    "DB_NAME": "ares-dev",
+    "DB_USER": "dev-user",
+    "DB_PASSWORD": "B5M6RjCrVDcPXRm1",
+    "JWT_KEY": "s39Z6egvHCWKMHrl"
+  }
+}
