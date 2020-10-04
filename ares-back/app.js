@@ -3,9 +3,6 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
-
-require("dotenv").config();
 
 //IMPORT HTTP ERROR
 const HttpError = require("./models/common/http-error");
@@ -16,12 +13,6 @@ const categoryRoute = require("./routes/category-route");
 
 //EXPRESS APP
 const app = express();
-
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000",
-//   })
-// );
 
 //MIDDLEWARES
 app.use(morgan("dev"));
