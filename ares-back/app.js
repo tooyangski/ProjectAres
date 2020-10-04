@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 require("dotenv").config();
 
@@ -16,10 +17,25 @@ const categoryRoute = require("./routes/category-route");
 //EXPRESS APP
 const app = express();
 
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//   })
+// );
+
 //MIDDLEWARES
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+//HEADERS CONFIGURATIONS
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+
+  next();
+});
 
 //ROUTES MIDDLEWARE
 app.use("/api/user", userRoute);

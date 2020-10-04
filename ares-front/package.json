@@ -33,7 +33,9 @@
   },
   "devDependencies": {
     "bulma": "^0.9.1",
+    "bulma-pageloader": "^0.3.0",
     "react-hook-form": "^6.8.6",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "react-transition-group": "^4.4.1"
   }
 }
