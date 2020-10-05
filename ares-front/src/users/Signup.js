@@ -120,8 +120,19 @@ const Signup = () => {
                             required: true,
                             minLength: 6,
                             maxLength: 50,
+                            pattern: {
+                              value: /^[a-z ,.'-]+$/i,
+                              message: "The password must contain a number.",
+                            },
                           })}
                         />
+
+                        {errors.password &&
+                          errors.password.type === "pattern" && (
+                            <span className="tag is-danger">
+                              {errors.password.message}
+                            </span>
+                          )}
 
                         {errors.password &&
                           errors.password.type === "required" && (

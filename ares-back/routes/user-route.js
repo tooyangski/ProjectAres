@@ -28,7 +28,7 @@ router.post(
       .isLength({ min: 6, max: 50 })
       .withMessage("Password must not be less than 6 characters.")
       .matches(/\d/)
-      .withMessage("Password must contain a a number."),
+      .withMessage("Password must contain a number."),
   ],
   signup
 );
