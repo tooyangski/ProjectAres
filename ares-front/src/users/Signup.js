@@ -16,7 +16,7 @@ const Signup = () => {
   const onSubmit = async (data) => {
     try {
       const responseData = await sendRequest(
-        "http://localhost:8000/api/user/signup",
+        "/api/user/signup",
         "POST",
         JSON.stringify({
           name: data.name,

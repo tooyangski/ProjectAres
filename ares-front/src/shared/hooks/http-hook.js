@@ -7,13 +7,16 @@ export const useHttpClient = () => {
   const activeHttpRequests = useRef([]);
 
   const sendRequest = useCallback(
-    async (url, method = "GET", body = null, headers = {}) => {
+    async (targetRoute, method = "GET", body = null, headers = {}) => {
+      let baseUrl = process.env.REACT_APP_BACKEND_BASE_URL;
+      let finalUrl = baseUrl.concat(targetRoute);
+
       setIsLoading(true);
       const httpAbortCtrl = new AbortController();
       activeHttpRequests.current.push(httpAbortCtrl);
 
       try {
-        const response = await fetch(url, {
+        const response = await fetch(finalUrl, {
           method,
           body,
           headers,

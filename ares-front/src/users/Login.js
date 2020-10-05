@@ -16,7 +16,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       const responseData = await sendRequest(
-        "http://localhost:8000/api/user/login",
+        "/api/user/login",
         "POST",
         JSON.stringify({
           name: data.name,
