@@ -118,19 +118,16 @@ const Signup = () => {
                           placeholder="Your Password"
                           ref={register({
                             required: true,
+                            pattern: /^[a-z ,.'-]+$/i,
                             minLength: 6,
                             maxLength: 50,
-                            pattern: {
-                              value: /^[a-z ,.'-]+$/i,
-                              message: "The password must contain a number.",
-                            },
                           })}
                         />
 
                         {errors.password &&
                           errors.password.type === "pattern" && (
                             <span className="tag is-danger">
-                              {errors.password.message}
+                              The password must contain a number.
                             </span>
                           )}
 
