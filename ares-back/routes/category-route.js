@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const fileUpload = require("../middlewares/file-upload");
 const checkAuth = require("../middlewares/check-auth");
-
 const { check } = require("express-validator");
 
 const {
@@ -19,6 +19,7 @@ router.use(checkAuth);
 
 router.post(
   "/",
+  fileUpload.single("image"),
   [
     check("name")
       .not()

@@ -1,11 +1,8 @@
 const Category = require("../models/category");
 const HttpError = require("../models/common/http-error");
-
-const mongoose = require("mongoose");
+const { uploadToAWS, retrieveFile } = require("../middlewares/aws-extension");
 
 const { validationResult } = require("express-validator");
-const e = require("express");
-const { response } = require("express");
 
 const getAllCategories = async (req, res, next) => {
   let categories;

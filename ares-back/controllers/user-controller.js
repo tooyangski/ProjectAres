@@ -1,7 +1,9 @@
-const User = require("../models/user");
-const HttpError = require("../models/common/http-error");
+const fs = require("fs");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
+const User = require("../models/user");
+const HttpError = require("../models/common/http-error");
 
 const { validationResult } = require("express-validator");
 
