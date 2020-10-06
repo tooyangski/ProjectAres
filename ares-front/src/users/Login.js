@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import loginLogo from "../images/login.svg";
 
-import ErrorModal from "../shared/components/modals/ErrorModal";
 import CubeSpinner from "../shared/components/loaders/CubeSpinner";
+import ErrorNotification from "../shared/components/notifications/ErrorNotification";
 
 import { useForm } from "react-hook-form";
 import { useHttpClient } from "../shared/hooks/http-hook";
@@ -36,12 +36,6 @@ const Login = () => {
 
   return (
     <React.Fragment>
-      <ErrorModal
-        error={error}
-        show={error ? true : false}
-        isActive={error ? "is-active" : null}
-        onClose={clearError}
-      ></ErrorModal>
       <div className="container">
         {isLoading && <CubeSpinner />}
         <section className="hero is-fullheight">
@@ -64,20 +58,34 @@ const Login = () => {
                       alt="profile"
                     />
                   </figure>
+                  <hr className="login-hr" />
+                  {error && (
+                    <ErrorNotification onClose={clearError}>
+                      {error}
+                    </ErrorNotification>
+                  )}
                   <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
                     <div className="field">
                       <div className="control">
                         <input
                           name="email"
                           className="input"
-                          type="email"
                           placeholder="Your Email"
-                          ref={register({ required: true })}
+                          ref={register({
+                            required: true,
+                            pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          })}
                         />
 
                         {errors.email && errors.email.type === "required" && (
                           <span className="tag is-danger">
                             This field is required.
+                          </span>
+                        )}
+
+                        {errors.email && errors.email.type === "pattern" && (
+                          <span className="tag is-danger">
+                            Invalid Email Address.
                           </span>
                         )}
                       </div>
@@ -94,6 +102,7 @@ const Login = () => {
                             required: true,
                             minLength: 6,
                             maxLength: 50,
+                            pattern: /\d/,
                           })}
                         />
 
@@ -108,6 +117,13 @@ const Login = () => {
                           errors.password.type === "minLength" && (
                             <span className="tag is-danger">
                               This field needs at least 6 characters.
+                            </span>
+                          )}
+
+                        {errors.password &&
+                          errors.password.type === "pattern" && (
+                            <span className="tag is-danger">
+                              Password must contain at least one digit.
                             </span>
                           )}
                       </div>
