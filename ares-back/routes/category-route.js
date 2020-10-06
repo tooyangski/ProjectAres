@@ -12,7 +12,11 @@ const {
   updateCategory,
 } = require("../controllers/category-controller");
 
+//http://localhost:8000/api/category/
+//http://localhost:8000/api/category/?page=1&limit=1
 router.get("/", getAllCategories);
+
+//http://localhost:8000/api/category/5f7c5cc2c96677114cec78ec
 router.get("/:categoryId", getCategoryById);
 
 router.use(checkAuth);

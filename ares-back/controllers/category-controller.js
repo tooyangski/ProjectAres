@@ -85,7 +85,16 @@ const createCategory = async (req, res, next) => {
 const getAllCategories = async (req, res, next) => {
   let categories;
   try {
-    categories = await Category.find();
+    const limit = parseInt(req.query.limit);
+    const page = parseInt(req.query.page);
+
+    if (!limit && !page) {
+      categories = await Category.find();
+    } else {
+      categories = await Category.find()
+        .limit(limit)
+        .skip((page - 1) * limit);
+    }
   } catch (err) {
     const error = new HttpError(
       "Failed to fetch categories, please try again later.",
