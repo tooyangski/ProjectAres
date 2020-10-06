@@ -40,6 +40,8 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
   if (req.file) {
+    //If the saving was not successful, the file would be deleted.
+    //This is to ensure it wont create uneeded files.
     fs.unlink(req.file.path, (err) => {
       console.log(err);
     });

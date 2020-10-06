@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "projectares-291618",
+  "private_key_id": "14db0013ff158722cf04b62500ca48f24a3e22b6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDndpXBdmj47H/d\n2k4p0ynOXvo/aPmYWfT8imRJQxtNEvm/TF6XmdFaNdNhi+rRXT75duuwav0SDkRX\ncshsngy0o5c8vNgTKynjM+ZynZCLYC15KHT0pj7Yqm1YcigtpXnKfnUV4+aYT6nE\nj2DFKFQ8Q62hLAZHtxg74Ho3N+P6cgJoP0AarMqJidI+ejUM2fm/BWyvvDe7Vv+O\nVYtPP1Lhrp6YVq9ja1TkazEoQqdsVo2AcPJnMlyHwdcSOOGOgPsTRaW6cm/KNFxi\nip5N9EG6BzkDsymvyIlA7/62LWpqVo0dvfTFy5hPmKUnZKjo56+5cHiTONzESgol\njIa4ZGX1AgMBAAECggEAJPzAMEAkb31rbspPKe6ChGXiW3ZXnE7pD99q6IIpagbu\n6JuNlMWRvMv+fAdd022xKIV7uEoAfX17fPXsrTQRwl6km6IZwpu9Kn9wAz9xNQnT\nem71RuW3WUGIDlV/siZP8K8wiqT2g78HLqUyyOQJl0UWs+X9wuwGmrA5F3so79Yx\nBaHrhp/cFfFV3Ndc9q7v1n4tnqqPpSYOv3KfbJoUA5bhmhzRfTKE6AsB9sUsFMdH\npQVtQfq8pnZCugusavt4qe+BJ/0exGu6B1/1aRZHhtkAjNKFrFcxr5rMj7tzS8zD\ncQz5IG1DnZ5NhqckpKEfrlDsuJvrmaf96MshywTOaQKBgQD16wyA7jnSlFIKOomv\nRUs2WrE8gw7mMdAI9zhTrCnrn1oWFgS/pv90cQQ0vGiZWyNrk9yYhk1KBP/9Q7od\nE2F2wjioz2Tq4WRoK9eSwXcUbVQE/xShHIg8wNAIT+tn5FRNhKKdpwtgmtEBDJWB\nLKdhK1a80i4zgyOWxDTTUWzz5wKBgQDw89RH50DbKr/YOdnC480/RlOp+Cpm6Kw8\nUX6627WdSi3yZR957dT0DtK0emjGM4kaGDHuLIKcRHdplQpmYsdtXpbDeDBoVjbW\noAX1T62tIi+kD11vAFnAzfomm4OgZ6nXvud/RdYaRQVs3oMy2uTkj41plTBM+ndn\nzpFw3EDbwwKBgE+h64ycl/DOwro5NnihMbfKKnZz4hE8tCcTFxRRPcnk8iEQxDzj\ncPld14TUNfLjBldBrD9fzgtYDyUOF2hu7DKutfZEImPE1OS+vbHyIANnW7u6dg2t\n1ZgGv9bROmOMFph7iMUQYKjJuUBjuM35jcHzbMT8MqXPo2ig5JJBXcylAoGAdN4e\n6V0t5N+gO1Ub3N42z+jhbYBTuKRD3eG9MQ6d0ROIo5gOo0oKzvFdm3H/3Zpjdkej\n+ByYoQjITmqep7hjeBW31Ek4WXLvmDv3h9tEpsP9DXryW4N1BQIiwZUOS7/b7ivH\nBsEtroIptntacVEgUgealEprKfsV7UCQ5Ie/4ZcCgYB+FNfUkGY0/GpsBda4aIxx\n3Eh0CcwKIkZULrCFbfzLsp+YfsXOii73va9kxQZNBDjYkllYrs8jkobjiXngeilz\nBJnyFfRtqMb9wfZ4cfF2BUpvuRT3xrPLfqhUbqdPc5BeOkKWpLi6zy1Eyacmiqvi\n18mCSsoqnvvvrzMSVI+wmg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "project-ares-dev@projectares-291618.iam.gserviceaccount.com",
+  "client_id": "113623090818169807660",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/project-ares-dev%40projectares-291618.iam.gserviceaccount.com"
+}

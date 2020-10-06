@@ -41,6 +41,7 @@ router.post(
 
 router.patch(
   "/:categoryId",
+  fileUpload.single("image"),
   [
     check("name")
       .not()

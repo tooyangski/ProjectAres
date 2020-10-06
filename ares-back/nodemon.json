@@ -2,7 +2,9 @@
   "env": {
     "DB_NAME": "ares-dev",
     "DB_USER": "dev-user",
-    "DB_PASSWORD": "B5M6RjCrVDcPXRm1",
-    "JWT_KEY": "s39Z6egvHCWKMHrl"
+    "DB_PASSWORD": "CwC6ctttJDvxYHed",
+    "JWT_KEY": "s39Z6egvHCWKMHrl",
+    "GGL_PROJECT_ID": "projectares-291618",
+    "GGL_BUCKET_NAME": "project-ares-bucket"
   }
 }
