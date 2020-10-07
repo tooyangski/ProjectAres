@@ -1,5 +1,6 @@
 {
   "env": {
+    "CURRENT_STATUS": "development",
     "DB_NAME": "ares-dev",
     "DB_USER": "dev-user",
     "DB_PASSWORD": "CwC6ctttJDvxYHed",

@@ -3,23 +3,27 @@ const router = express.Router();
 
 const fileUpload = require("../middlewares/file-upload");
 const checkAuth = require("../middlewares/check-auth");
+const checkIsAdmin = require("../middlewares/check-admin");
+
 const { check } = require("express-validator");
 
 const {
-  getAllCategories,
+  getCategories,
   getCategoryById,
   createCategory,
   updateCategory,
+  deleteCategory,
 } = require("../controllers/category-controller");
 
 //http://localhost:8000/api/category/
-//http://localhost:8000/api/category/?page=1&limit=1
-router.get("/", getAllCategories);
+//http://localhost:8000/api/category/?page=1&limit=1&isActive=1
+router.get("/", getCategories);
 
 //http://localhost:8000/api/category/5f7c5cc2c96677114cec78ec
 router.get("/:categoryId", getCategoryById);
 
 router.use(checkAuth);
+router.use(checkIsAdmin);
 
 router.post(
   "/",
@@ -64,5 +68,7 @@ router.patch(
   ],
   updateCategory
 );
+
+router.delete("/:categoryId", deleteCategory);
 
 module.exports = router;

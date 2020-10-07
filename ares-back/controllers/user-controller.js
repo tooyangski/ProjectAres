@@ -1,4 +1,3 @@
-const fs = require("fs");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -6,13 +5,15 @@ const User = require("../models/user");
 const HttpError = require("../models/common/http-error");
 
 const { validationResult } = require("express-validator");
+const controller = "USER";
 
 const signup = async (req, res, next) => {
+  const stackTrace = { controller, action: "SIGNUP" };
   const result = validationResult(req);
 
   if (!result.isEmpty()) {
     errMessage = result.errors[0].msg;
-    return next(new HttpError(errMessage, 400));
+    return next(new HttpError(errMessage, 400, stackTrace));
   }
 
   const { name, email, password } = req.body;
@@ -23,15 +24,19 @@ const signup = async (req, res, next) => {
     if (existingUser) {
       const error = new HttpError(
         "User exists already, please login instead.",
-        422
+        422,
+        stackTrace
       );
+
       return next(error);
     }
   } catch (err) {
     const error = new HttpError(
       "Failed to create user, please try again later.",
-      500
+      500,
+      stackTrace
     );
+
     return next(error);
   }
 
@@ -41,8 +46,10 @@ const signup = async (req, res, next) => {
   } catch (err) {
     const error = new HttpError(
       "Failed to create user, please try again later.",
-      500
+      500,
+      stackTrace
     );
+
     return next(error);
   }
 
@@ -57,23 +64,31 @@ const signup = async (req, res, next) => {
   } catch (err) {
     const error = new HttpError(
       "Failed to create user, please try again later.",
-      500
+      500,
+      stackTrace
     );
+
     return next(error);
   }
 
   let token;
   try {
     token = jwt.sign(
-      { userId: createdUser.id, email: createdUser.email },
+      {
+        userId: createdUser.id,
+        email: createdUser.email,
+        role: createdUser.role,
+      },
       process.env.JWT_KEY,
       { expiresIn: "1h" }
     );
   } catch (err) {
     const error = new HttpError(
       "Failed to create user, please try again later.",
-      500
+      500,
+      stackTrace
     );
+
     return next(error);
   }
 
@@ -83,8 +98,15 @@ const signup = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const stackTrace = { controller, action: "LOGIN" };
+  const result = validationResult(req);
 
+  if (!result.isEmpty()) {
+    errMessage = result.errors[0].msg;
+    return next(new HttpError(errMessage, 400, stackTrace));
+  }
+
+  const { email, password } = req.body;
   let existingUser;
 
   try {
@@ -93,15 +115,19 @@ const login = async (req, res, next) => {
     if (!existingUser) {
       const error = new HttpError(
         "Invalid credentials, could not log you in.",
-        403
+        403,
+        stackTrace
       );
+
       return next(error);
     }
   } catch (err) {
     const error = new HttpError(
       "Failed to login, please try again later.",
-      500
+      500,
+      stackTrace
     );
+
     return next(error);
   }
 
@@ -116,31 +142,40 @@ const login = async (req, res, next) => {
     if (!isValidPassword) {
       const error = new HttpError(
         "Invalid credentials, could not log you in.",
-        403
+        403,
+        stackTrace
       );
+
       return next(error);
     }
   } catch (err) {
-    console.log(err);
     const error = new HttpError(
       "Failed to login, please try again later.",
-      500
+      500,
+      stackTrace
     );
+
     return next(error);
   }
 
   let token;
   try {
     token = jwt.sign(
-      { userId: existingUser.id, email: existingUser.email },
+      {
+        userId: existingUser.id,
+        email: existingUser.email,
+        role: existingUser.role,
+      },
       process.env.JWT_KEY,
       { expiresIn: "1h" }
     );
   } catch (err) {
     const error = new HttpError(
       "Failed to login, please try again later.",
-      500
+      500,
+      stackTrace
     );
+
     return next(error);
   }
 

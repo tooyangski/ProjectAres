@@ -11,6 +11,7 @@ const HttpError = require("./models/common/http-error");
 //IMPORT ROUTES
 const userRoute = require("./routes/user-route");
 const categoryRoute = require("./routes/category-route");
+const productRoute = require("./routes/product-route");
 
 //EXPRESS APP
 const app = express();
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 //ROUTES MIDDLEWARE
 app.use("/api/user", userRoute);
 app.use("/api/category", categoryRoute);
+app.use("/api/product", productRoute);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
@@ -50,8 +52,18 @@ app.use((error, req, res, next) => {
   if (res.headerSent) {
     return next(error);
   }
+
   res.status(error.code || 500);
-  res.json({ error: error.message || "Something went wrong!" });
+
+  if (process.env.CURRENT_STATUS === "development" && error.code === 500)
+    res.json({
+      error: error.message || "Something went wrong!",
+      stackTrace: error.stackTrace,
+    });
+  else
+    res.json({
+      error: error.message || "Something went wrong!",
+    });
 });
 
 const DB_USER = process.env.DB_USER;
