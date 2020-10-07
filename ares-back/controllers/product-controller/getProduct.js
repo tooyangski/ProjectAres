@@ -8,18 +8,13 @@ const getProducts = async (req, res, next) => {
 
   let products;
   try {
-    const limit = parseInt(req.query.limit);
-    const page = parseInt(req.query.page);
+    const limit = req.query.limit ? parseInt(req.query.limit) : 10;
+    const page = req.query.page ? parseInt(req.query.page) : 1;
+    const isActive = req.query.isActive ? req.query.isActive : true;
 
-    const isActive = req.query.isActive;
-
-    if (!limit && !page && !isActive) {
-      products = await Product.find();
-    } else {
-      products = await Product.find({ isActive })
-        .limit(limit)
-        .skip((page - 1) * limit);
-    }
+    products = await Product.find({ isActive })
+      .limit(limit)
+      .skip((page - 1) * limit);
   } catch (err) {
     const error = new HttpError(
       "Failed to fetch products, please try again later.",
