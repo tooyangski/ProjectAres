@@ -58,13 +58,6 @@ router.patch(
       .trim()
       .isLength({ min: 3, max: 50 })
       .withMessage("Name must not be less than 3 characters."),
-    check("description")
-      .not()
-      .isEmpty()
-      .withMessage("Description must not be empty.")
-      .trim()
-      .isLength({ min: 5, max: 250 })
-      .withMessage("Description must not be less than 5 characters."),
   ],
   updateCategory
 );

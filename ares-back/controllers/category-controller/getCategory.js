@@ -10,12 +10,13 @@ const getCategories = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit);
     const page = parseInt(req.query.page);
-    const isActive = parseInt(req.query.isActive);
+
+    const isActive = req.query.isActive;
 
     if (!limit && !page && !isActive) {
       categories = await Category.find();
     } else {
-      categories = await Category.find({ isActive: 1 })
+      categories = await Category.find({ isActive })
         .limit(limit)
         .skip((page - 1) * limit);
     }

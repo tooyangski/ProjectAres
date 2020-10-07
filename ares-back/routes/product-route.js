@@ -72,27 +72,6 @@ router.patch(
   "/:productId",
   fileUpload.single("image"),
   [
-    check("name")
-      .not()
-      .isEmpty()
-      .withMessage("Name must not be empty.")
-      .trim()
-      .isLength({ min: 3, max: 50 })
-      .withMessage("Name must not be less than 3 characters."),
-    check("description")
-      .not()
-      .isEmpty()
-      .withMessage("Description must not be empty.")
-      .trim()
-      .isLength({ min: 5, max: 250 })
-      .withMessage("Description must not be less than 5 characters."),
-    check("price")
-      .not()
-      .isEmpty()
-      .withMessage("Price must not be empty.")
-      .trim()
-      .isNumeric()
-      .withMessage("Price must be a number."),
     check("category")
       .not()
       .isEmpty()
@@ -100,13 +79,6 @@ router.patch(
       .trim()
       .isMongoId()
       .withMessage("Category must be an ID."),
-    check("shipping")
-      .not()
-      .isEmpty()
-      .withMessage("Shipping must not be empty.")
-      .trim()
-      .isBoolean()
-      .withMessage("Shipping must be a boolean."),
   ],
   updateProduct
 );

@@ -10,7 +10,8 @@ const getProducts = async (req, res, next) => {
   try {
     const limit = parseInt(req.query.limit);
     const page = parseInt(req.query.page);
-    const isActive = parseInt(req.query.isActive);
+
+    const isActive = req.query.isActive;
 
     if (!limit && !page && !isActive) {
       products = await Product.find();

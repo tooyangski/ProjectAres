@@ -17,7 +17,7 @@ module.exports = updateCategory = async (req, res, next) => {
     return next(new HttpError(errMessage, 400, stackTrace));
   }
 
-  const { name, description } = req.body;
+  const { name, description, isActive } = req.body;
   let targetCategory;
 
   try {
@@ -110,7 +110,15 @@ module.exports = updateCategory = async (req, res, next) => {
   }
 
   targetCategory.name = name;
-  targetCategory.description = description;
+
+  if (description) {
+    targetCategory.description = description;
+  }
+
+  if (isActive) {
+    targetCategory.isActive = isActive;
+  }
+
   await targetCategory.save();
 
   res

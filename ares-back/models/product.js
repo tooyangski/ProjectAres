@@ -40,8 +40,8 @@ const productSchema = new Schema(
       default: 0,
     },
     isActive: {
-      type: Number,
-      default: 1,
+      type: Boolean,
+      default: true,
     },
     shipping: {
       type: Boolean,

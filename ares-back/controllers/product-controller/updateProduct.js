@@ -17,7 +17,7 @@ module.exports = updateProduct = async (req, res, next) => {
     return next(new HttpError(errMessage, 400, stackTrace));
   }
 
-  const { name, description, price, category, shipping } = req.body;
+  const { name, description, price, category, shipping, isActive } = req.body;
 
   let targetProduct;
   try {
@@ -87,11 +87,29 @@ module.exports = updateProduct = async (req, res, next) => {
     targetProduct.image = newUploadUrl;
   }
 
-  targetProduct.name = name;
-  targetProduct.description = description;
-  targetProduct.price = price;
-  targetProduct.category = category;
-  targetProduct.shipping = shipping;
+  if (isActive) {
+    targetProduct.isActive = isActive;
+  }
+
+  if (name) {
+    targetProduct.name = name;
+  }
+
+  if (description) {
+    targetProduct.description = description;
+  }
+
+  if (price) {
+    targetProduct.price = price;
+  }
+
+  if (category) {
+    targetProduct.category = category;
+  }
+
+  if (shipping) {
+    targetProduct.shipping = shipping;
+  }
 
   await targetProduct.save();
 

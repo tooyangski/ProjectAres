@@ -23,8 +23,8 @@ const categorySchema = new Schema(
       required: true,
     },
     isActive: {
-      type: Number,
-      default: 1,
+      type: Boolean,
+      default: true,
     },
   },
   { timestamps: true }
