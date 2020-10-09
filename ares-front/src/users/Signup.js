@@ -28,7 +28,7 @@ const Signup = () => {
         }
       );
 
-      auth.login(responseData.userId, responseData.token);
+      auth.login(responseData.userId, responseData.role, responseData.token);
     } catch (err) {
       console.error(err);
     }

@@ -17,7 +17,15 @@ module.exports = updateProduct = async (req, res, next) => {
     return next(new HttpError(errMessage, 400, stackTrace));
   }
 
-  const { name, description, price, category, shipping, isActive } = req.body;
+  const {
+    name,
+    description,
+    price,
+    category,
+    shipping,
+    isActive,
+    stock,
+  } = req.body;
 
   let targetProduct;
   try {
@@ -101,6 +109,10 @@ module.exports = updateProduct = async (req, res, next) => {
 
   if (price) {
     targetProduct.price = price;
+  }
+
+  if (stock) {
+    targetProduct.stock = stock;
   }
 
   if (category) {

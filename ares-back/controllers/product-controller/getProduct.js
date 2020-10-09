@@ -8,13 +8,19 @@ const getProducts = async (req, res, next) => {
 
   let products;
   try {
+    const all = req.query.all ? req.query.all : false;
+
     const limit = req.query.limit ? parseInt(req.query.limit) : 10;
     const page = req.query.page ? parseInt(req.query.page) : 1;
     const isActive = req.query.isActive ? req.query.isActive : true;
 
-    products = await Product.find({ isActive })
-      .limit(limit)
-      .skip((page - 1) * limit);
+    if (all) {
+      products = await Product.find();
+    } else {
+      products = await Product.find({ isActive })
+        .limit(limit)
+        .skip((page - 1) * limit);
+    }
   } catch (err) {
     const error = new HttpError(
       "Failed to fetch products, please try again later.",
@@ -47,5 +53,33 @@ const getProductById = async (req, res, next) => {
   res.json(product);
 };
 
+const getProductsByCategoryId = async (req, res, next) => {
+  const stackTrace = { controller, action: "GET_BY_CATEGORY_ID" };
+  const categoryId = req.params.categoryId;
+
+  const limit = req.query.limit ? parseInt(req.query.limit) : 10;
+  const page = req.query.page ? parseInt(req.query.page) : 1;
+  const isActive = req.query.isActive ? req.query.isActive : true;
+
+  let products;
+
+  try {
+    products = await Product.find({ category: categoryId, isActive })
+      .populate("category")
+      .limit(limit)
+      .skip((page - 1) * limit);
+  } catch (err) {
+    const error = new HttpError(
+      "Failed to fetch products, please try again later.",
+      500,
+      stackTrace
+    );
+
+    return next(error);
+  }
+  res.json(products);
+};
+
 exports.getProducts = getProducts;
 exports.getProductById = getProductById;
+exports.getProductsByCategoryId = getProductsByCategoryId;

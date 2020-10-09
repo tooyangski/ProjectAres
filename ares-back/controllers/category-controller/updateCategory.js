@@ -109,7 +109,9 @@ module.exports = updateCategory = async (req, res, next) => {
     targetCategory.image = newUploadUrl;
   }
 
-  targetCategory.name = name;
+  if (name) {
+    targetCategory.name = name;
+  }
 
   if (description) {
     targetCategory.description = description;

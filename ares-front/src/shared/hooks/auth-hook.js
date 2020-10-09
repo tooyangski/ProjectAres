@@ -6,18 +6,23 @@ export const useAuth = () => {
   const [token, setToken] = useState(false);
   const [tokenExpirationDate, setTokenExpirationDate] = useState();
   const [userId, setUserId] = useState(false);
+  const [role, setUserRole] = useState(false);
 
-  const login = useCallback((uid, token, expirationDate) => {
+  const login = useCallback((uid, role, token, expirationDate) => {
     setToken(token);
     setUserId(uid);
+    setUserRole(role);
+
     const tokenExpirationDate =
       expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
     setTokenExpirationDate(tokenExpirationDate);
+
     localStorage.setItem(
       "userData",
       JSON.stringify({
         userId: uid,
         token: token,
+        role: role,
         expiration: tokenExpirationDate.toISOString(),
       })
     );
@@ -27,6 +32,7 @@ export const useAuth = () => {
     setToken(null);
     setTokenExpirationDate(null);
     setUserId(null);
+    setUserRole(null);
     localStorage.removeItem("userData");
   }, []);
 
@@ -40,6 +46,7 @@ export const useAuth = () => {
     }
   }, [token, logout, tokenExpirationDate]);
 
+  //THE PURPOSE OF THIS IS TO PERSIST SESSION
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userData"));
     if (
@@ -49,11 +56,12 @@ export const useAuth = () => {
     ) {
       login(
         storedData.userId,
+        storedData.role,
         storedData.token,
         new Date(storedData.expiration)
       );
     }
   }, [login]);
 
-  return { token, login, logout, userId };
+  return { token, login, logout, userId, role };
 };

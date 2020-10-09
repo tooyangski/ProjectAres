@@ -20,7 +20,7 @@ module.exports = createProduct = async (req, res, next) => {
     return next(new HttpError(errMessage, 400, stackTrace));
   }
 
-  const { name, description, price, category, shipping } = req.body;
+  const { name, description, price, category, shipping, stock } = req.body;
 
   try {
     let existingProduct = await Product.findOne({ name: name });
@@ -73,6 +73,7 @@ module.exports = createProduct = async (req, res, next) => {
     price,
     category,
     image: uploadUrl,
+    stock,
     isActive: 1,
     shipping,
   });

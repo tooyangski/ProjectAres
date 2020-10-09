@@ -8,13 +8,19 @@ const getCategories = async (req, res, next) => {
 
   let categories;
   try {
+    const all = req.query.all ? req.query.all : false;
+
     const limit = req.query.limit ? parseInt(req.query.limit) : 10;
     const page = req.query.page ? parseInt(req.query.page) : 1;
     const isActive = req.query.isActive ? req.query.isActive : true;
 
-    categories = await Category.find({ isActive })
-      .limit(limit)
-      .skip((page - 1) * limit);
+    if (all) {
+      categories = await Category.find();
+    } else {
+      categories = await Category.find({ isActive })
+        .limit(limit)
+        .skip((page - 1) * limit);
+    }
   } catch (err) {
     const error = new HttpError(
       "Failed to fetch categories, please try again later.",
@@ -24,7 +30,12 @@ const getCategories = async (req, res, next) => {
 
     return next(error);
   }
-  res.json(categories);
+
+  res.json({
+    categories: categories.map((category) =>
+      category.toObject({ getters: true })
+    ),
+  });
 };
 
 const getCategoryById = async (req, res, next) => {

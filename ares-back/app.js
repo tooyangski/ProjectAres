@@ -16,6 +16,16 @@ const productRoute = require("./routes/product-route");
 //EXPRESS APP
 const app = express();
 
+//BACKUP
+// app.use(
+//   cors({
+//     origin: "*",
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     preflightContinue: false,
+//     optionsSuccessStatus: 204,
+//   })
+// );
+
 //MIDDLEWARES
 app.use(morgan("dev"));
 app.use(bodyParser.json());

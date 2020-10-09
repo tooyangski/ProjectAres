@@ -32,6 +32,14 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
+    stock: {
+      type: Number,
+      required: true,
+    },
+    sold: {
+      type: Number,
+      default: 0,
+    },
     views: {
       type: Number,
       trim: true,

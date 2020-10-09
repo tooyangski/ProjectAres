@@ -10,17 +10,21 @@ const { check } = require("express-validator");
 const {
   getProducts,
   getProductById,
+  getProductsByCategoryId,
   createProduct,
   updateProduct,
   deleteProduct,
 } = require("../controllers/product-controller");
 
 //http://localhost:8000/api/product/
-//http://localhost:8000/api/product/?page=1&limit=1&isActive=1
+//http://localhost:8000/api/product/?page=1&limit=1&isActive=true
 router.get("/", getProducts);
 
 //http://localhost:8000/api/product/5f7c5cc2c96677114cec78ec
 router.get("/:productId", getProductById);
+
+//http://localhost:8000/api/product/category/:categoryId
+router.get("/category/:categoryId", getProductsByCategoryId);
 
 router.use(checkAuth);
 router.use(checkIsAdmin);
@@ -50,6 +54,13 @@ router.post(
       .trim()
       .isNumeric()
       .withMessage("Price must be a number."),
+    check("stock")
+      .not()
+      .isEmpty()
+      .withMessage("Stock must not be empty.")
+      .trim()
+      .isNumeric()
+      .withMessage("Stock must be a number."),
     check("category")
       .not()
       .isEmpty()

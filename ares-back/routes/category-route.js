@@ -47,20 +47,7 @@ router.post(
   createCategory
 );
 
-router.patch(
-  "/:categoryId",
-  fileUpload.single("image"),
-  [
-    check("name")
-      .not()
-      .isEmpty()
-      .withMessage("Name must not be empty.")
-      .trim()
-      .isLength({ min: 3, max: 50 })
-      .withMessage("Name must not be less than 3 characters."),
-  ],
-  updateCategory
-);
+router.patch("/:categoryId", fileUpload.single("image"), updateCategory);
 
 router.delete("/:categoryId", deleteCategory);
 
